@@ -3,5 +3,5 @@ import { IAction } from '../../interfaces/action';
 
 export class CreateActionDto implements IAction {
   name: string;
-  element?: IElement;
+  element?: Array<IElement | string>;
 }

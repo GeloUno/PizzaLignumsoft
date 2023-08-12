@@ -4,7 +4,7 @@ import { IAction } from 'src/interfaces/action';
 
 export type ElementDocument = Element & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Element implements IElement {
   @Prop()
   name: string;

@@ -3,5 +3,5 @@ import { IElement } from '../../interfaces/element';
 
 export class CreateElementDto implements IElement {
   name: string;
-  action?: IAction[];
+  action?: IAction | string;
 }

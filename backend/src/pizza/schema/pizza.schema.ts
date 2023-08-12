@@ -5,7 +5,7 @@ import { Element } from '../../element/schema/element.schema';
 
 export type TwoFactorDocument = Pizza & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Pizza {
   @Prop()
   name: string;
