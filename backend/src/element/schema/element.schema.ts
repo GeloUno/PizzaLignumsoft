@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Schema as SchemaMongoose } from 'mongoose';
 import { IElement } from '../../interfaces/element';
 import { IAction } from 'src/interfaces/action';
 
@@ -8,7 +9,7 @@ export type ElementDocument = Element & Document;
 export class Element implements IElement {
   @Prop()
   name: string;
-  @Prop()
+  @Prop({ type: SchemaMongoose.Types.ObjectId, ref: 'Action', unique: false })
   action?: IAction;
 }
 
