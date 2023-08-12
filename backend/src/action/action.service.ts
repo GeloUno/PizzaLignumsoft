@@ -28,9 +28,13 @@ export class ActionService {
   update(id: string, updateActionDto: UpdateActionDto) {
     if (!Monngoose.Types.ObjectId.isValid(id))
       throw new ConflictException('No id');
-    return this.actionModel.findByIdAndUpdate(id, updateActionDto, {
-      new: true,
-    });
+    return this.actionModel.findByIdAndUpdate(
+      id,
+      { $push: { element: updateActionDto.element } },
+      {
+        new: true,
+      },
+    );
   }
 
   remove(id: string) {
