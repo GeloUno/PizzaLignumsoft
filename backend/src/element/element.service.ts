@@ -1,11 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { CreateElementDto } from './dto/create-element.dto';
 import { UpdateElementDto } from './dto/update-element.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Element, ElementDocument } from './schema/element.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class ElementService {
+  constructor(
+    @InjectModel(Element.name) private elementModel: Model<ElementDocument>,
+  ) {}
   create(createElementDto: CreateElementDto) {
-    return 'This action adds a new element';
+    return this.elementModel.create(createElementDto);
   }
 
   findAll() {
