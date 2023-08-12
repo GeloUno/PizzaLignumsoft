@@ -7,7 +7,7 @@ export type TwoFactorDocument = Pizza & Document;
 
 @Schema({ timestamps: true })
 export class Pizza {
-  @Prop()
+  @Prop({ unique: true })
   name: string;
 
   @Prop([{ type: SchemaMongoose.Types.ObjectId, ref: 'Action', unique: false }])

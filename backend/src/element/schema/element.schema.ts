@@ -7,7 +7,7 @@ export type ElementDocument = Element & Document;
 
 @Schema({ timestamps: true })
 export class Element implements IElement {
-  @Prop()
+  @Prop({ unique: true })
   name: string;
   @Prop({ type: SchemaMongoose.Types.ObjectId, ref: 'Action', unique: false })
   action?: IAction;

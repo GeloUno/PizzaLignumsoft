@@ -6,7 +6,7 @@ export type ActionDocument = Action & Document;
 
 @Schema({ timestamps: true })
 export class Action implements IAction {
-  @Prop()
+  @Prop({ unique: true })
   name: string;
 
   @Prop([
