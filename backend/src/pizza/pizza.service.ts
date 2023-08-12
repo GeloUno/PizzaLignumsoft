@@ -16,19 +16,34 @@ export class PizzaService {
   }
 
   findAll() {
-    return `This action returns all pizza`;
+    return this.pizzaModel
+      .find()
+      .populate('action')
+      .populate('element')
+      .lean()
+      .exec();
   }
 
   findOne(id: string) {
     if (!Monngoose.Types.ObjectId.isValid(id))
       throw new ConflictException('No id');
-    return `This action returns a #${id} pizza`;
+    return this.pizzaModel.findById(id);
   }
 
-  update(id: string, updatePizzaDto: UpdatePizzaDto) {
+  async addActionElement(id: string, updatePizzaDto: UpdatePizzaDto) {
     if (!Monngoose.Types.ObjectId.isValid(id))
       throw new ConflictException('No id');
-    return `This action updates a #${id} pizza`;
+
+    return this.pizzaModel.findByIdAndUpdate(
+      id,
+      {
+        $push: {
+          action: updatePizzaDto.action,
+          element: updatePizzaDto.element,
+        },
+      },
+      { new: true },
+    );
   }
 
   remove(id: string) {

@@ -32,7 +32,7 @@ export class PizzaController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePizzaDto: UpdatePizzaDto) {
-    return this.pizzaService.update(id, updatePizzaDto);
+    return this.pizzaService.addActionElement(id, updatePizzaDto);
   }
 
   @Delete(':id')
