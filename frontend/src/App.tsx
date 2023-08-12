@@ -1,26 +1,17 @@
 import './App.css';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import PizzasPage from './Pages/PizzasPage';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
-async function getData() {
-  const result = await axios.get('/api');
-  return result;
-}
 function App() {
-  const [data, setData] = useState(undefined);
-  useEffect(() => {
-    getData().then((data) => {
-      setData(data.data.message);
-      return data;
-    });
-
-    return () => {};
-  }, []);
+  const queryClient = new QueryClient();
 
   return (
     <div className="App">
-      <PizzasPage />
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools position="bottom-right" initialIsOpen={true} />
+        <PizzasPage />
+      </QueryClientProvider>
     </div>
   );
 }
