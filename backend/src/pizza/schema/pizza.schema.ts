@@ -3,7 +3,7 @@ import { Schema as SchemaMongoose } from 'mongoose';
 import { Action } from '../../action/schema/action.schema';
 import { Element } from '../../element/schema/element.schema';
 
-export type TwoFactorDocument = Pizza & Document;
+export type PizzaDocument = Pizza & Document;
 
 @Schema({ timestamps: true })
 export class Pizza {
