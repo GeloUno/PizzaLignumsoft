@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { PizzaService } from './pizza.service';
 import { CreatePizzaDto } from './dto/create-pizza.dto';
 import { UpdatePizzaDto } from './dto/update-pizza.dto';
@@ -19,16 +27,16 @@ export class PizzaController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.pizzaService.findOne(+id);
+    return this.pizzaService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePizzaDto: UpdatePizzaDto) {
-    return this.pizzaService.update(+id, updatePizzaDto);
+    return this.pizzaService.update(id, updatePizzaDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.pizzaService.remove(+id);
+    return this.pizzaService.remove(id);
   }
 }

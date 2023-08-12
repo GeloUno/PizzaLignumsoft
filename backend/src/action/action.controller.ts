@@ -17,9 +17,7 @@ export class ActionController {
 
   @Post()
   create(@Body() createActionDto: CreateActionDto) {
-    // create() {
     return this.actionService.create(createActionDto);
-    // return this.actionService.create();
   }
 
   @Get()
@@ -29,16 +27,16 @@ export class ActionController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.actionService.findOne(+id);
+    return this.actionService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateActionDto: UpdateActionDto) {
-    return this.actionService.update(+id, updateActionDto);
+    return this.actionService.update(id, updateActionDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.actionService.remove(+id);
+    return this.actionService.remove(id);
   }
 }

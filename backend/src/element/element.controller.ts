@@ -27,16 +27,16 @@ export class ElementController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.elementService.findOne(+id);
+    return this.elementService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateElementDto: UpdateElementDto) {
-    return this.elementService.update(+id, updateElementDto);
+    return this.elementService.update(id, updateElementDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.elementService.remove(+id);
+    return this.elementService.remove(id);
   }
 }
