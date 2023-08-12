@@ -16,19 +16,21 @@ export class ActionService {
   }
 
   findAll() {
-    return `This action returns all action`;
+    return this.actionModel.find().lean().exec();
   }
 
   findOne(id: string) {
     if (!Monngoose.Types.ObjectId.isValid(id))
       throw new ConflictException('No id');
-    return `This action returns a #${id} action`;
+    return this.actionModel.findById(id).lean().exec();
   }
 
   update(id: string, updateActionDto: UpdateActionDto) {
     if (!Monngoose.Types.ObjectId.isValid(id))
       throw new ConflictException('No id');
-    return `This action updates a #${id} action`;
+    return this.actionModel.findByIdAndUpdate(id, updateActionDto, {
+      new: true,
+    });
   }
 
   remove(id: string) {

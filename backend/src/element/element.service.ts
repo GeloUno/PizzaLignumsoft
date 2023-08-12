@@ -16,19 +16,22 @@ export class ElementService {
   }
 
   findAll() {
-    return `This action returns all element`;
+    return this.elementModel.find().lean().exec();
   }
 
   findOne(id: string) {
     if (!Monngoose.Types.ObjectId.isValid(id))
       throw new ConflictException('No id');
-    return `This action returns a #${id} element`;
+    return this.elementModel.findById(id).lean().exec();
   }
 
   update(id: string, updateElementDto: UpdateElementDto) {
     if (!Monngoose.Types.ObjectId.isValid(id))
       throw new ConflictException('No id');
-    return `This action updates a #${id} element`;
+    return this.elementModel
+      .findByIdAndUpdate(id, updateElementDto, { new: true })
+      .lean()
+      .exec();
   }
 
   remove(id: string) {
