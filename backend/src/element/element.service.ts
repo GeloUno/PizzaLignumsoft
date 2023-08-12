@@ -24,8 +24,13 @@ export class ElementService {
       throw new ConflictException('No id');
     return this.elementModel.findById(id).lean().exec();
   }
+  findByAction(id: string) {
+    if (!Monngoose.Types.ObjectId.isValid(id))
+      throw new ConflictException('No id');
+    return this.elementModel.find({ action: id }).lean().exec();
+  }
 
-  update(id: string, updateElementDto: UpdateElementDto) {
+  addAction(id: string, updateElementDto: UpdateElementDto) {
     if (!Monngoose.Types.ObjectId.isValid(id))
       throw new ConflictException('No id');
     return this.elementModel

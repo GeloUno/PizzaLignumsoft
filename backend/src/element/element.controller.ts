@@ -29,10 +29,17 @@ export class ElementController {
   findOne(@Param('id') id: string) {
     return this.elementService.findOne(id);
   }
+  @Get('/byaction/:id')
+  findByAction(@Param('id') id: string) {
+    return this.elementService.findByAction(id);
+  }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateElementDto: UpdateElementDto) {
-    return this.elementService.update(id, updateElementDto);
+  addAction(
+    @Param('id') id: string,
+    @Body() updateElementDto: UpdateElementDto,
+  ) {
+    return this.elementService.addAction(id, updateElementDto);
   }
 
   @Delete(':id')
