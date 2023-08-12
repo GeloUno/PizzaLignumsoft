@@ -29,6 +29,14 @@ export class PizzaController {
   findOne(@Param('id') id: string) {
     return this.pizzaService.findOne(id);
   }
+  @Get('byelement/:id')
+  findOneByElement(@Param('id') id: string) {
+    return this.pizzaService.findOneByElement(id);
+  }
+  @Get('byaction/:id')
+  findOneByAction(@Param('id') id: string) {
+    return this.pizzaService.findOneByAction(id);
+  }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePizzaDto: UpdatePizzaDto) {

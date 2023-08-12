@@ -27,7 +27,32 @@ export class PizzaService {
   findOne(id: string) {
     if (!Monngoose.Types.ObjectId.isValid(id))
       throw new ConflictException('No id');
-    return this.pizzaModel.findById(id);
+    return this.pizzaModel
+      .findById(id)
+      .populate('action')
+      .populate('element')
+      .lean()
+      .exec();
+  }
+  findOneByAction(id: string) {
+    if (!Monngoose.Types.ObjectId.isValid(id))
+      throw new ConflictException('No id');
+    return this.pizzaModel
+      .find({ action: id })
+      .populate('action')
+      .populate('element')
+      .lean()
+      .exec();
+  }
+  findOneByElement(id: string) {
+    if (!Monngoose.Types.ObjectId.isValid(id))
+      throw new ConflictException('No id');
+    return this.pizzaModel
+      .find({ element: id })
+      .populate('action')
+      .populate('element')
+      .lean()
+      .exec();
   }
 
   async addActionElement(id: string, updatePizzaDto: UpdatePizzaDto) {
