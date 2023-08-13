@@ -18,8 +18,7 @@ export class PizzaService {
   findAll() {
     return this.pizzaModel
       .find()
-      .populate('action')
-      .populate('element')
+      .select(['-__v', '-updatedAt', '-createdAt'])
       .lean()
       .exec();
   }
