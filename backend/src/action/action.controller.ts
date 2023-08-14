@@ -24,6 +24,10 @@ export class ActionController {
   findAll() {
     return this.actionService.findAll();
   }
+  @Get('byelement/:id')
+  findAllByElement(@Param('id') id: string) {
+    return this.actionService.findAllByElement(id);
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {

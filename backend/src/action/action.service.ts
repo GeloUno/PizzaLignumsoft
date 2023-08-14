@@ -18,6 +18,15 @@ export class ActionService {
   findAll() {
     return this.actionModel.find().lean().exec();
   }
+  findAllByElement(id: string) {
+    if (!Monngoose.Types.ObjectId.isValid(id))
+      throw new ConflictException('No id');
+    return this.actionModel
+      .find({ element: id })
+      .populate('element')
+      .lean()
+      .exec();
+  }
 
   findOne(id: string) {
     if (!Monngoose.Types.ObjectId.isValid(id))
