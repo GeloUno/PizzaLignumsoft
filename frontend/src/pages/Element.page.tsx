@@ -1,18 +1,27 @@
-import { useParams } from 'react-router';
-import Content from '../components/Content';
 import Error from '../components/Error';
-import ElementDetailPage from './ElementDetail.page';
+import Loading from '../components/Loading';
+import NavBar from '../components/NavBar';
+import { useQuery } from 'react-query';
+import { getAllElement } from '../controllers/element';
+import ListProduct, { ProductEnum } from '../components/ListProduct';
 
 function ElementPage() {
-  const { id } = useParams();
-  if (id) {
-    return (
-      <Content margin={4} padding={4}>
-        <ElementDetailPage elementId={id} />
-      </Content>
-    );
-  } else {
+  const { isError, isLoading, data } = useQuery(
+    ['getAllAction'],
+    async () => await getAllElement()
+  );
+
+  if (isLoading) {
+    return <Loading />;
+  } else if (isError || data === undefined || data.data === undefined) {
     return <Error />;
+  } else {
+    return (
+      <>
+        <NavBar />
+        <ListProduct data={data.data} type={ProductEnum.ELEMENT} />;
+      </>
+    );
   }
 }
 

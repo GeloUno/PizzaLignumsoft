@@ -3,6 +3,7 @@ import { getAllPizza } from '../controllers/pizza';
 import Loading from '../components/Loading';
 import Error from '../components/Error';
 import ListPizza from '../components/ListPizza';
+import NavBar from '../components/NavBar';
 
 function PizzaPage() {
   const { isLoading, isError, data } = useQuery(
@@ -15,7 +16,12 @@ function PizzaPage() {
   } else if (isError || data === undefined || data.data === undefined) {
     return <Error />;
   } else {
-    return <ListPizza data={data.data} />;
+    return (
+      <>
+        <NavBar />
+        <ListPizza data={data.data} />;
+      </>
+    );
   }
 }
 
