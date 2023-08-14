@@ -24,14 +24,14 @@ export class ElementController {
   findAll() {
     return this.elementService.findAll();
   }
+  @Get('byaction/:id')
+  findAllByAction(@Param('id') id: string) {
+    return this.elementService.findAllByAction(id);
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.elementService.findOne(id);
-  }
-  @Get('/byaction/:id')
-  findByAction(@Param('id') id: string) {
-    return this.elementService.findByAction(id);
   }
 
   @Patch(':id')
