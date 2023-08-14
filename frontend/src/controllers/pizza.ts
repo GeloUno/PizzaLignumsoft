@@ -19,7 +19,7 @@ export async function getAllPizzaByElement(
 }
 export async function getAllPizzaByAction(
   actionId: string
-): Promise<AxiosResponse<IPizza>> {
+): Promise<AxiosResponse<Array<IPizza>>> {
   const result = await axios.get(`api/pizza/byaction/${actionId}`);
   return result;
 }
