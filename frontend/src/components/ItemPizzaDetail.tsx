@@ -2,7 +2,6 @@ import { IPizza } from '../interfaces/pizza';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { generate } from 'short-uuid';
-import Content from './Content';
 import { Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 
@@ -21,32 +20,32 @@ function ItemPizzaDetail({ pizza }: ItemPizzaDetailProps) {
           Bardzo dobra pizza opis jeje walorów, mniam mniam itd..
         </Card.Text>
         <Row>
-          <Card.Text>składniki:</Card.Text>
+          <Card.Title>składniki:</Card.Title>
           {pizza.element.map((elementOfPizza) => (
-            <Content key={generate()} margin={2} padding={2}>
+            <Row key={generate()} className="m-2">
               <Button
-                variant="primary"
+                variant="light"
                 onClick={() => {
                   navigate(`/element/${elementOfPizza._id}`);
                 }}
               >
                 {elementOfPizza.name}
               </Button>
-            </Content>
+            </Row>
           ))}
 
-          <Card.Text>akcje:</Card.Text>
+          <Card.Title>akcje:</Card.Title>
           {pizza.action.map((actionOfPizza) => (
-            <Content key={generate()} margin={2} padding={2}>
+            <Row key={generate()} className="d-flex m-2">
               <Button
-                variant="primary"
+                variant="light"
                 onClick={() => {
                   navigate(`/action/${actionOfPizza._id}`);
                 }}
               >
                 {actionOfPizza.name}
               </Button>
-            </Content>
+            </Row>
           ))}
         </Row>
       </Card.Body>
