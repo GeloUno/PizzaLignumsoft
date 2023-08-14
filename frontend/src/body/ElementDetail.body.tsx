@@ -1,15 +1,19 @@
 import React from 'react';
-import { useQueries, useQuery } from 'react-query';
+import { useQueries } from 'react-query';
 import Error from '../components/Error';
 import Loading from '../components/Loading';
-import Content from '../components/Content';
+
 import { getAllPizzaByElement } from '../controllers/pizza';
 import { getAllActionByElement } from '../controllers/action';
+import { ProductEnum } from '../components/ListProduct';
+import { getElementById } from '../controllers/element';
+import ProductDetailBody from './ProductDetail.body';
+
 interface IElementDetailBodyProps {
   elementId: string;
 }
 function ElementDetailBody({ elementId }: IElementDetailBodyProps) {
-  const [pizzaQuery, actionQuery] = useQueries([
+  const [pizzaQuery, actionQuery, elementQuery] = useQueries([
     {
       queryKey: [`pizzaWithElement`, elementId],
       queryFn: async () => await getAllPizzaByElement(elementId),
@@ -18,17 +22,32 @@ function ElementDetailBody({ elementId }: IElementDetailBodyProps) {
       queryKey: [`ActionWithElement`, elementId],
       queryFn: async () => await getAllActionByElement(elementId),
     },
+    {
+      queryKey: [`getOneElementByID`, elementId],
+      queryFn: async () => await getElementById(elementId),
+    },
   ]);
 
-  if (pizzaQuery.isError || actionQuery.isError) {
+  if (pizzaQuery.isError || actionQuery.isError || elementQuery.isError) {
     return <Error />;
-  } else if (pizzaQuery.isLoading || actionQuery.isLoading) {
+  } else if (
+    pizzaQuery.isLoading ||
+    actionQuery.isLoading ||
+    elementQuery.isLoading ||
+    pizzaQuery.data === undefined ||
+    actionQuery.data === undefined ||
+    elementQuery.data === undefined
+  ) {
     return <Loading />;
   } else {
     return (
-      <Content margin={4} padding={4}>
-        Element DetailPage
-      </Content>
+      <ProductDetailBody
+        name={elementQuery.data.data.name}
+        type={ProductEnum.ELEMENT}
+        product={actionQuery.data.data}
+        pizzaArray={pizzaQuery.data.data}
+        path={ProductEnum.ACTION}
+      />
     );
   }
 }
