@@ -21,32 +21,36 @@ function ItemPizzaDetail({ pizza }: ItemPizzaDetailProps) {
         </Card.Text>
         <Row>
           <Card.Title>składniki:</Card.Title>
-          {pizza.element.map((elementOfPizza) => (
-            <Row key={generate()} className="m-2">
-              <Button
-                variant="light"
-                onClick={() => {
-                  navigate(`/element/${elementOfPizza._id}`);
-                }}
-              >
-                {elementOfPizza.name}
-              </Button>
-            </Row>
-          ))}
+          {pizza !== undefined &&
+            pizza.element.length !== 0 &&
+            pizza.element.map((elementOfPizza) => (
+              <Row key={generate()} className="m-2">
+                <Button
+                  variant="light"
+                  onClick={() => {
+                    navigate(`/element/${elementOfPizza._id}`);
+                  }}
+                >
+                  {elementOfPizza.name}
+                </Button>
+              </Row>
+            ))}
 
           <Card.Title>akcje:</Card.Title>
-          {pizza.action.map((actionOfPizza) => (
-            <Row key={generate()} className="d-flex m-2">
-              <Button
-                variant="light"
-                onClick={() => {
-                  navigate(`/action/${actionOfPizza._id}`);
-                }}
-              >
-                {actionOfPizza.name}
-              </Button>
-            </Row>
-          ))}
+          {pizza !== undefined &&
+            pizza.action.length !== 0 &&
+            pizza.action.map((actionOfPizza) => (
+              <Row key={generate()} className="d-flex m-2">
+                <Button
+                  variant="light"
+                  onClick={() => {
+                    navigate(`/action/${actionOfPizza._id}`);
+                  }}
+                >
+                  {actionOfPizza.name}
+                </Button>
+              </Row>
+            ))}
         </Row>
       </Card.Body>
     </Card>
