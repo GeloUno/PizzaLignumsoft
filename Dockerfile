@@ -22,8 +22,6 @@ WORKDIR /usr/src/PizzaLignumsoft/backend
 
 ENV APP_PORT=3001
 
-ENV MONGODBPASSWORD=ucAYwFa5ZlDwNpkB
-
 RUN npm install
 
 RUN npm run build
